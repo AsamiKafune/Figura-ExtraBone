@@ -17,8 +17,7 @@ Bridges Figura and Emotecraft by adding a special bone and Group system that sup
 This mod operates by:
 
 - Adding Bone Structure: Creates special Groups/bones in Figura models that support Emotecraft's system
-- Animation Mapping: Converts and blends animation data from Emotecraft to work with Figura
-- Script Management: Uses automated scripts to handle movement and blending between different animations
+- Animation Mapping: Converts and blends animation data from Emotecraft to work with Figura Avatar
 
 # 📌 Download
 https://modrinth.com/mod/figura_extrabone
