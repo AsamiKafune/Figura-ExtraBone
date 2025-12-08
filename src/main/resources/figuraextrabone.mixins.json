@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "moe.kfn.figuraextrabone.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "minVersion": "0.8",
+  "client": [
+    "AvatarWizardMixin"
+  ],
+  "mixins": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
