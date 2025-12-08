@@ -383,8 +383,9 @@ public class AvatarWizardMixin {
             model = buildModel();
 
         byte[] readme = null;
+        if(WizardEntryEx.SUPPORT_BLEND.asBool(map))
         readme = """
-                Model / Script \"extrabone_lib.lua\" ที่ถูกสร้างขึ้นนี้เป็น Model / Script จาก Figura เวอร์ชั่น Custom ของ Mirror @Magiclab
+                Model / Script \"extrabone_lib.lua\" ที่ถูกสร้างขึ้นนี้เป็น Model / Script จาก Figura addon Extrabone
                 กรุณาไม่แอบอ้างหรือนำ Mod ของทางโปรเจ็คไปดัดแปลง
                 พบเห็นหรือต้องการสอบถามเพิ่มเติม Discord: kafunech
                 """.getBytes();
@@ -394,10 +395,8 @@ public class AvatarWizardMixin {
             blendScript = """
                     -- ## extrabone_lib -> Emotecraft Support Library ##
                     
-                    -- Script นี้รองรับแค่ Figura ของที่มี Addon ExtraBone จาก Mirror @MagicLab เท่านั้นไม่สามารถนำไปใช้นอก Addon ได้
-                    -- หากสนใจสอบถามเพิ่มเติม Discord: kafunech
-                    
-                    -- ไม่อนุญาตให้ดัดหรือนำไปแอบอ้างรวมถึงการนำไปหารายได้ทุกกรณียกเว้นการทำ Avatar Commission หรือการได้รับอนุญาตเป็นลายลักษณ์อักษรจากโปรเจ็ค Mirror
+                    -- Script นี้รองรับแค่ Figura ของที่มี Addon ExtraBone เท่านั้นไม่สามารถนำไปใช้นอก Addon ได้
+                    -- หากสนใจสอบถามเพิ่มเติม https://modrinth.com/mod/figura_extrabone
                     
                     local boneList = {}
                     local function ExtraBoneInit(list)

@@ -3,7 +3,6 @@ Bridges Figura and Emotecraft by adding a special bone and Group system that sup
 
 # ✨ Features
 - Animation Blending: Automatic support for blending animations from Emotecraft.
-- Custom Bone System: Adds special Groups/bones for advanced animation management
 - Automatic Script Integration: Comes with pre-built scripts for managing bones and animations
 - Seamless Integration: Works with both Figura and Emotecraft without additional configuration
 - Client-Side: No server-side installation required
