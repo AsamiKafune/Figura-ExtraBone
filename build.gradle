@@ -39,10 +39,6 @@ dependencies {
     runtimeOnly "maven.modrinth:bendy-lib:4.0.0-fabric"
     runtimeOnly "maven.modrinth:emotecraft:2.2.7-b.build.50+1.20.1-fabric"
     include modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:1.0.2-rc1+1.20")
-
-    implementation "com.github.FiguraMC.luaj:luaj-core:$luaj-figura"
-    implementation "com.github.FiguraMC.luaj:luaj-jse:$luaj-figura"
-    implementation "com.nevovisionaries:nv-websocket-client:$nv_websocket"
 }
 
 processResources {
