@@ -130,11 +130,6 @@ dependencies {
     runtimeOnly "maven.modrinth:freecam:ROfcbxxe"
 
     implementation "maven.modrinth:figura:yXFi1fed"
-
-    implementation "com.github.FiguraMC.luaj:luaj-core:$luaj-figura"
-    implementation "com.github.FiguraMC.luaj:luaj-jse:$luaj-figura"
-    implementation "com.neovisionaries:nv-websocket-client:$nv_websocket"
-
     implementation "dev.kosmx.player-anim:player-animation-lib-forge:2.0.1+1.21.1"
 }
 
