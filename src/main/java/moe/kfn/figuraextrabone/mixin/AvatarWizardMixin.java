@@ -6,10 +6,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import moe.kfn.figuraextrabone.imp.BlockBenchModelEx;
 import moe.kfn.figuraextrabone.imp.WizardEntryEx;
-import net.minecraft.Util;
-import net.minecraft.client.Minecraft;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.util.Util;
 import org.figuramc.figura.avatar.local.LocalAvatarFetcher;
 import org.figuramc.figura.math.vector.FiguraVec3;
 import org.figuramc.figura.utils.ColorUtils;
@@ -55,7 +55,7 @@ import static org.figuramc.figura.model.ParentType.RightParrotPivot;
 import static org.figuramc.figura.model.ParentType.RightShoulderPivot;
 import static org.figuramc.figura.model.ParentType.RightSpyglassPivot;
 
-@OnlyIn(Dist.CLIENT)
+@Environment(EnvType.CLIENT)
 @Mixin(value = AvatarWizard.class, remap = false)
 public class AvatarWizardMixin {
     @Shadow
@@ -89,7 +89,7 @@ public class AvatarWizardMixin {
 
         //authors
         String authorStr = (String) map.get(WizardEntry.AUTHORS);
-        String playerName = Minecraft.getInstance().player.getName().getString();
+        String playerName = MinecraftClient.getInstance().player.getName().getString();
         String[] authors = authorStr == null ? new String[]{playerName} : authorStr.split(",");
         if (authors.length == 0) authors = new String[]{playerName};
 
@@ -424,7 +424,7 @@ public class AvatarWizardMixin {
                 .write("avatar.png", iconTexture);
 
         //open file manager
-        Util.getPlatform().openUri(folder.toUri());
+        Util.getOperatingSystem().open(folder.toUri());
         ci.cancel();
     }
 
