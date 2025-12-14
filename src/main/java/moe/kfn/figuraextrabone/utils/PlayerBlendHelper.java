@@ -37,7 +37,7 @@ public class PlayerBlendHelper {
             AnimationStack stack = getAnimationStack(player);
             if (stack == null) return Vec3f.ZERO;
 
-            float partialTicks = MinecraftClient.getInstance().getTickDelta();
+            float partialTicks = MinecraftClient.getInstance().getRenderTickCounter().getTickDelta(true);
             return stack.get3DTransform(partName, type, partialTicks, Vec3f.ZERO);
         } catch (Exception e) {
             return Vec3f.ZERO;

@@ -35,10 +35,9 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    implementation "maven.modrinth:figura:0.1.5+1.20.1"
-    runtimeOnly "maven.modrinth:bendy-lib:4.0.0-fabric"
-    runtimeOnly "maven.modrinth:emotecraft:2.2.7-b.build.50+1.20.1-fabric"
-    include modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:1.0.2-rc1+1.20")
+    implementation "maven.modrinth:figura:0.1.5+1.21.1"
+    runtimeOnly "maven.modrinth:emotecraft:2.4.12+1.21.1-fabric"
+    include modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:2.0.1+1.21.1")
 }
 
 processResources {
@@ -50,7 +49,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 17
+	it.options.release = 21
 }
 
 java {
@@ -59,8 +58,8 @@ java {
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
 
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 }
 
 jar {
