@@ -8,9 +8,9 @@ Bridges Figura and Emotecraft by adding a special bone and Group system that sup
 - Client-Side: No server-side installation required
 
 # 📦 Requirements
-- Minecraft: 1.21.1 (Neoforge only)
+- Minecraft: 1.21.1 (Fabric only)
 - Figura: 0.1.5 or higher
-- Emotecraft: 2.4.12+1.21.1-forge or higher
+- Emotecraft: 2.4.12+1.21.1-fabric or higher
 
 # 💡 How It Works
 This mod operates by:
