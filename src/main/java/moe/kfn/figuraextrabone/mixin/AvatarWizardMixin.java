@@ -385,8 +385,8 @@ public class AvatarWizardMixin {
         byte[] readme = null;
         if(WizardEntryEx.SUPPORT_BLEND.asBool(map))
         readme = """
-                Model / Script \"extrabone_lib.lua\" ที่ถูกสร้างขึ้นนี้เป็น Model / Script จาก Figura addon Extrabone
-                สอบถามเพิ่มเติม Discord: kafunech
+                The Model / Script \"extrabone_lib.lua\" is from the Figura ExtraBone addon.
+                For more information, contact Discord: kafunech
                 """.getBytes();
 
         byte[] blendScript = null;
@@ -394,9 +394,9 @@ public class AvatarWizardMixin {
             blendScript = """
                     -- ## extrabone_lib -> Emotecraft Support Library ##
                     
-                    -- Script นี้รองรับแค่ Figura ของที่มี Addon ExtraBone เท่านั้นไม่สามารถนำไปใช้นอก Addon ได้
-                    -- หากสนใจสามารถดาวน์โหลดมอดได้ที่ https://modrinth.com/mod/figura_extrabone
-                    -- สอบถามเพิ่มเติม Discord: kafunech
+                    -- This script only supports Figura with the ExtraBone Addon and cannot be used outside of that Addon.
+                    -- If you're interested, you can download the mod at: https://modrinth.com/mod/figura_extrabone
+                    -- For more information, contact Discord: kafunech
                     
                     local boneList = {}
                     local function ExtraBoneInit(list)
@@ -405,8 +405,10 @@ public class AvatarWizardMixin {
                     
                     events.RENDER:register(function(delta)
                         local uuid = player:getUUID()
-                        for key, value in pairs(boneList) do
-                            value[1]:rot(vec((ExtraBone.getBone(uuid,value[2])[2] * (180/math.pi)) * -1, 0, 0))
+                        if client:isModLoaded("figuraextrabone") then
+                            for key, value in pairs(boneList) do
+                                value[1]:rot(vec((ExtraBone.getBone(uuid,value[2])[2] * (180/math.pi)) * -1, 0, 0))
+                            end
                         end
                     end)
                     
