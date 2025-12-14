@@ -4,8 +4,8 @@ import dev.kosmx.playerAnim.api.TransformType;
 import dev.kosmx.playerAnim.api.layered.AnimationStack;
 import dev.kosmx.playerAnim.core.util.Vec3f;
 import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationAccess;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.AbstractClientPlayerEntity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.AbstractClientPlayer;
 import org.joml.Vector3f;
 
 import java.util.UUID;
@@ -13,7 +13,7 @@ import java.util.UUID;
 public class PlayerBlendHelper {
 
     public static Vector3f getBlend(UUID playerUuid, String modelPart) {
-        AbstractClientPlayerEntity player = getPlayer(playerUuid);
+        AbstractClientPlayer player = getPlayer(playerUuid);
         if (player == null) return new Vector3f(0, 0, 0);
 
         Vec3f bendVec = getAnimationTransform(player, modelPart, TransformType.BEND);
@@ -24,7 +24,7 @@ public class PlayerBlendHelper {
         return new Vector3f(bendVec.getX(), bendVec.getY(), bendVec.getZ());
     }
 
-    private static AnimationStack getAnimationStack(AbstractClientPlayerEntity player) {
+    private static AnimationStack getAnimationStack(AbstractClientPlayer player) {
         try {
             return PlayerAnimationAccess.getPlayerAnimLayer(player);
         } catch (Exception e) {
@@ -32,24 +32,24 @@ public class PlayerBlendHelper {
         return null;
     }
 
-    private static Vec3f getAnimationTransform(AbstractClientPlayerEntity player, String partName, TransformType type) {
+    private static Vec3f getAnimationTransform(AbstractClientPlayer player, String partName, TransformType type) {
         try {
             AnimationStack stack = getAnimationStack(player);
             if (stack == null) return Vec3f.ZERO;
 
-            float partialTicks = MinecraftClient.getInstance().getTickDelta();
+            float partialTicks = Minecraft.getInstance().getPartialTick();
             return stack.get3DTransform(partName, type, partialTicks, Vec3f.ZERO);
         } catch (Exception e) {
             return Vec3f.ZERO;
         }
     }
 
-    private static AbstractClientPlayerEntity getPlayer(UUID playerUuid) {
-        MinecraftClient mc = MinecraftClient.getInstance();
-        if (mc.world == null) return null;
+    private static AbstractClientPlayer getPlayer(UUID playerUuid) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.level == null) return null;
 
-        for (AbstractClientPlayerEntity p : mc.world.getPlayers()) {
-            if (p.getUuid().equals(playerUuid) && p instanceof AbstractClientPlayerEntity) {
+        for (AbstractClientPlayer p : mc.level.players()) {
+            if (p.getUUID().equals(playerUuid) && p instanceof AbstractClientPlayer) {
                 return p;
             }
         }
