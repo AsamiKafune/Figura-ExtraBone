@@ -8,6 +8,7 @@ import org.figuramc.figura.lua.docs.LuaTypeDoc;
 import org.figuramc.figura.math.vector.FiguraVec3;
 import org.joml.Vector3f;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @LuaWhitelist
@@ -19,13 +20,30 @@ public class ExtraBoneAPI {
     @LuaWhitelist
     @LuaMethodDoc(
             overloads = @LuaMethodOverload(
-                    argumentTypes = {String.class,String.class},
-                    argumentNames = {"uuid","modelPart"}
+                    argumentTypes = {String.class, String.class},
+                    argumentNames = {"uuid", "modelPart"}
             ),
             value = "extra_bone.get_blend"
     )
     public static float getBone(String uuid, String modelPart) {
         try {
+
+            if (Objects.equals(modelPart, "leftArm")) {
+                modelPart = "left_arm";
+            }
+
+            if (Objects.equals(modelPart, "rightArm")) {
+                modelPart = "right_arm";
+            }
+
+            if (Objects.equals(modelPart, "leftLeg")) {
+                modelPart = "left_leg";
+            }
+
+            if (Objects.equals(modelPart, "rightLeg")) {
+                modelPart = "right_leg";
+            }
+
             return PlayerBlendHelper.getBlend(UUID.fromString(uuid), modelPart);
         } catch (Exception e) {
             return 0.0f;
