@@ -11,6 +11,9 @@ base {
 }
 
 repositories {
+    flatDir {
+        dir 'libs'
+    }
     mavenCentral()
     maven { url = 'https://jitpack.io' }
 	maven {
@@ -34,8 +37,9 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    implementation "maven.modrinth:figura:0.1.5+1.21.1"
-    runtimeOnly "maven.modrinth:emotecraft:2.4.12+1.21.1-fabric"
+    modImplementation "local:figura-0.1.5+1.21.8-fabric-mc"
+//    implementation "maven.modrinth:figura:0.1.5+1.21.8"
+    runtimeOnly "maven.modrinth:emotecraft:3.0.0-b.build.139+1.21.7-fabric"
 	modImplementation "com.zigythebird.playeranim:PlayerAnimationLibFabric:$project.pal_version"
 }
 
