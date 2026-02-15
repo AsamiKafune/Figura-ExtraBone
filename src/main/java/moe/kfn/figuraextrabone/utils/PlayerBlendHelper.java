@@ -1,48 +1,33 @@
 package moe.kfn.figuraextrabone.utils;
 
-import dev.kosmx.playerAnim.api.TransformType;
-import dev.kosmx.playerAnim.api.layered.AnimationStack;
-import dev.kosmx.playerAnim.core.util.Vec3f;
-import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationAccess;
+import com.zigythebird.playeranim.PlayerAnimLibMod;
+import com.zigythebird.playeranim.accessors.IPlayerAnimationState;
+import com.zigythebird.playeranim.animation.PlayerAnimManager;
+import com.zigythebird.playeranim.animation.PlayerAnimationController;
+import com.zigythebird.playeranimcore.animation.AnimationController;
+import com.zigythebird.playeranimcore.bones.PlayerAnimBone;
+import com.zigythebird.playeranimcore.enums.TransformType;
+import com.zigythebird.playeranimcore.animation.layered.AnimationStack;
+import com.zigythebird.playeranimcore.math.Vec3f;
+import com.zigythebird.playeranim.api.PlayerAnimationAccess;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
+import net.minecraft.util.math.Vec3d;
 import org.joml.Vector3f;
 
+import java.util.Random;
 import java.util.UUID;
 
 public class PlayerBlendHelper {
 
-    public static Vector3f getBlend(UUID playerUuid, String modelPart) {
+
+    public static float getBlend(UUID playerUuid, String modelPart){
         AbstractClientPlayerEntity player = getPlayer(playerUuid);
-        if (player == null) return new Vector3f(0, 0, 0);
-
-        Vec3f bendVec = getAnimationTransform(player, modelPart, TransformType.BEND);
-        if (bendVec == null || bendVec == Vec3f.ZERO) {
-            return new Vector3f(0, 0, 0);
-        }
-
-        return new Vector3f(bendVec.getX(), bendVec.getY(), bendVec.getZ());
+        PlayerAnimManager manager = PlayerAnimationAccess.getPlayerAnimManager(player);
+        PlayerAnimBone bone = new PlayerAnimBone(modelPart);
+        return manager.get3DTransform(bone).getBend();
     }
 
-    private static AnimationStack getAnimationStack(AbstractClientPlayerEntity player) {
-        try {
-            return PlayerAnimationAccess.getPlayerAnimLayer(player);
-        } catch (Exception e) {
-        }
-        return null;
-    }
-
-    private static Vec3f getAnimationTransform(AbstractClientPlayerEntity player, String partName, TransformType type) {
-        try {
-            AnimationStack stack = getAnimationStack(player);
-            if (stack == null) return Vec3f.ZERO;
-
-            float partialTicks = MinecraftClient.getInstance().getRenderTickCounter().getTickDelta(true);
-            return stack.get3DTransform(partName, type, partialTicks, Vec3f.ZERO);
-        } catch (Exception e) {
-            return Vec3f.ZERO;
-        }
-    }
 
     private static AbstractClientPlayerEntity getPlayer(UUID playerUuid) {
         MinecraftClient mc = MinecraftClient.getInstance();
