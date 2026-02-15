@@ -24,12 +24,11 @@ public class ExtraBoneAPI {
             ),
             value = "extra_bone.get_blend"
     )
-    public static FiguraVec3 getBone(String uuid, String modelPart) {
+    public static float getBone(String uuid, String modelPart) {
         try {
-            Vector3f rot = PlayerBlendHelper.getBlend(UUID.fromString(uuid), modelPart);
-            return FiguraVec3.of(rot.x, rot.y, rot.z);
+            return PlayerBlendHelper.getBlend(UUID.fromString(uuid), modelPart);
         } catch (Exception e) {
-            return FiguraVec3.of(0, 0, 0);
+            return 0.0f;
         }
     }
 
