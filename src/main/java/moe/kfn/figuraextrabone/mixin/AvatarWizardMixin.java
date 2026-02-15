@@ -120,10 +120,10 @@ public class AvatarWizardMixin {
                         { models.model_blend.root.Body.chest, "body" },
                         { models.model_blend.root.LeftShoulder, "body" },
                         { models.model_blend.root.RightShoulder, "body" },
-                        { models.model_blend.root.LeftShoulder.LeftArm.LArmLower, "left_arm" },
-                        { models.model_blend.root.RightShoulder.RightArm.RArmLower, "right_arm" },
-                        { models.model_blend.root.LeftLeg.LLegLower, "left_leg" },
-                        { models.model_blend.root.RightLeg.RLegLower, "right_leg" }
+                        { models.model_blend.root.LeftShoulder.LeftArm.LArmLower, "leftArm" },
+                        { models.model_blend.root.RightShoulder.RightArm.RArmLower, "rightArm" },
+                        { models.model_blend.root.LeftLeg.LLegLower, "leftLeg" },
+                        { models.model_blend.root.RightLeg.RLegLower, "rightLeg" }
                     })
                     """;
 
