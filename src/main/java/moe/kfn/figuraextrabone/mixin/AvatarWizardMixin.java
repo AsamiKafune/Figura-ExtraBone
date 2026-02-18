@@ -115,15 +115,57 @@ public class AvatarWizardMixin {
         if (WizardEntryEx.SUPPORT_BLEND.asBool(map))
             script += """
                     local BoneInit = require("extrabone_lib")
+                    
+                    local function compareVersion(v1, v2)
+                        local i1, i2 = 1, 1
+                    
+                        while true do
+                            local n1 = tonumber(v1:match("(%d+)", i1))
+                            local n2 = tonumber(v2:match("(%d+)", i2))
+                    
+                            if not n1 and not n2 then
+                                return 0
+                            end
+                    
+                            n1 = n1 or 0
+                            n2 = n2 or 0
+                    
+                            if n1 > n2 then
+                                return 1
+                            elseif n1 < n2 then
+                                return -1
+                            end
+                    
+                            i1 = v1:find("%.", i1, true)
+                            i2 = v2:find("%.", i2, true)
+                    
+                            if i1 then i1 = i1 + 1 end
+                            if i2 then i2 = i2 + 1 end
+                    
+                            if not i1 and not i2 then
+                                return 0
+                            end
+                        end
+                    end
+                    
+                    local function isVersionAtLeast(current, required)
+                        return compareVersion(current, required) >= 0
+                    end
+                    
+                    local version = client:getVersion()
+                    local isNew = isVersionAtLeast(version, "1.21.1")
+                    
+                    local chestType = isNew and "torso" or "body"
+                    
                     BoneInit({
-                        { models.model_blend.root.Neck, "body" },
-                        { models.model_blend.root.Body.chest, "body" },
-                        { models.model_blend.root.LeftShoulder, "body" },
-                        { models.model_blend.root.RightShoulder, "body" },
-                        { models.model_blend.root.LeftShoulder.LeftArm.LArmLower, "leftArm" },
-                        { models.model_blend.root.RightShoulder.RightArm.RArmLower, "rightArm" },
-                        { models.model_blend.root.LeftLeg.LLegLower, "leftLeg" },
-                        { models.model_blend.root.RightLeg.RLegLower, "rightLeg" }
+                        { models.model_blend.root.Neck,                             "body" },
+                        { models.model_blend.root.Body.chest,                       chestType },
+                        { models.model_blend.root.LeftShoulder,                     "body" },
+                        { models.model_blend.root.RightShoulder,                    "body" },
+                        { models.model_blend.root.LeftShoulder.LeftArm.LArmLower,   "left_arm" },
+                        { models.model_blend.root.RightShoulder.RightArm.RArmLower, "right_arm" },
+                        { models.model_blend.root.LeftLeg.LLegLower,                "left_leg" },
+                        { models.model_blend.root.RightLeg.RLegLower,               "right_leg" },
                     })
                     """;
 
@@ -407,7 +449,7 @@ public class AvatarWizardMixin {
                         local uuid = player:getUUID()
                         if client:isModLoaded("figuraextrabone") then
                             for key, value in pairs(boneList) do
-                                value[1]:rot(vec((ExtraBone.getBone(uuid,value[2]) * (180/math.pi)) * -1, 0, 0))
+                                value[1]:rot(vec((ExtraBone.getBone(uuid,value[2])[2] * (180/math.pi)) * -1, 0, 0))
                             end
                         end
                     end)

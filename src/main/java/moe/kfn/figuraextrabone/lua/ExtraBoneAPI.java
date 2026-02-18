@@ -6,7 +6,6 @@ import org.figuramc.figura.lua.docs.LuaMethodDoc;
 import org.figuramc.figura.lua.docs.LuaMethodOverload;
 import org.figuramc.figura.lua.docs.LuaTypeDoc;
 import org.figuramc.figura.math.vector.FiguraVec3;
-import org.joml.Vector3f;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -25,9 +24,8 @@ public class ExtraBoneAPI {
             ),
             value = "extra_bone.get_blend"
     )
-    public static float getBone(String uuid, String modelPart) {
+    public static FiguraVec3 getBone(String uuid, String modelPart) {
         try {
-
             if (Objects.equals(modelPart, "leftArm")) {
                 modelPart = "left_arm";
             }
@@ -44,9 +42,9 @@ public class ExtraBoneAPI {
                 modelPart = "right_leg";
             }
 
-            return PlayerBlendHelper.getBlend(UUID.fromString(uuid), modelPart);
+            return FiguraVec3.of(0,PlayerBlendHelper.getBlend(UUID.fromString(uuid), modelPart),0);
         } catch (Exception e) {
-            return 0.0f;
+            return FiguraVec3.of(0, 0, 0);
         }
     }
 
